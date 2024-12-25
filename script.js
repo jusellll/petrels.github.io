@@ -13,6 +13,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+
 // Fungsi untuk mengirim pesan
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('messageForm').addEventListener('submit', function(event) {
@@ -20,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const name = this.name.value;
         const message = this.message.value;
+
+        console.log("Mengirim pesan:", name, message);
 
         // Menyimpan pesan ke Firestore
         db.collection('messages').add({
