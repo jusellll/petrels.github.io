@@ -11,8 +11,8 @@ if ($result->num_rows > 0) {
     // Tampilkan pesan satu per satu
     while ($row = $result->fetch_assoc()) {
         echo '<div class="message-box">';
-        echo '<p><strong>' . htmlspecialchars($row['name']) . '</strong></p>';
-        echo '<p>' . htmlspecialchars($row['message']) . '</p>';
+        echo '<p class="name"><strong>' . htmlspecialchars($row['name']) . '</strong></p>';
+        echo '<p class="text">' . htmlspecialchars($row['message']) . '</p>';
         echo '<span class="timestamp">' . htmlspecialchars($row['created_at']) . '</span>';
         echo '</div>';
     }
