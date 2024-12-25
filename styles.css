@@ -131,32 +131,17 @@ form button:hover {
 }
 
 /* Messages Section */
-#messages {
-    margin-top: 40px;
-    text-align: center;
-}
-
-#messages ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#messages li {
-    background-color: #e9ecef;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Styling untuk container pesan cinta */
 #messageContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    margin-top: 20px;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    color: #333;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
-/* Styling untuk setiap pesan */
 .message-box {
     background-color: #f8f9fa;
     border: 1px solid #ddd;
@@ -165,9 +150,9 @@ form button:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 
-/* Nama Pengirim */
 .message-box .name {
     font-size: 1.1em;
     font-weight: bold;
@@ -175,7 +160,6 @@ form button:hover {
     margin-bottom: 10px;
 }
 
-/* Pesan */
 .message-box .text {
     font-size: 1em;
     color: #555;
@@ -198,7 +182,82 @@ form button:hover {
     color: #333;
 }
 
+.dark-mode #messageContainer {
+    background-color: #444;
+    color: white;
+}
+
+.dark-mode .message-box {
+    background-color: #555;
+    border-color: #666;
+    color: white;
+}
+
 /* Transitions */
 section {
     transition: opacity 0.5s ease-in-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    form input, form textarea {
+        width: 90%;
+    }
+
+    #messageContainer {
+        max-height: 200px;
+        font-size: 0.9rem;
+    }
+
+    .message-box {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        height: 70vh;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    form input, form textarea {
+        width: 95%;
+    }
+
+    .button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    #messageContainer {
+        font-size: 0.8rem;
+    }
+
+    .spotify-embed iframe {
+        width: 100%;
+    }
 }
