@@ -6,15 +6,10 @@
     <title>Petrels of Love</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-        }
-
-        function showHiddenMessage(message) {
-            alert(message);
-        }
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-analytics.js"></script>
+    <script src="script.js" defer></script> <!-- Link ke file JavaScript -->
 </head>
 <body>
     <header>
@@ -48,19 +43,18 @@
         </section>
 
         <section class="form-section">
-            <h3>Kirim Pesan Cinta</h3>
-            <form action="https://formspree.io/f/mzzzdpwo" method="POST">
-                <input type="text" name="name" placeholder="Nama Anda" required />
-                <textarea name="message" placeholder="Pesan Anda" required></textarea>
-                <button type="submit">Kirim</button>
-            </form>
-        </section>
+    <h3>Kirim Pesan Cinta</h3>
+    <form id="messageForm">
+        <input type="text" name="name" placeholder="Nama Anda" required />
+        <textarea name="message" placeholder="Pesan Anda" required></textarea>
+        <button type="submit">Kirim</button>
+    </form>
+</section>
 
         <section id="messages">
             <h3>Pesan Cinta Publik</h3>
             <div id="messageContainer">
-                <!-- Memuat pesan cinta dari database -->
-                <?php include 'load_messages.php'; ?>
+                <!-- Pesan cinta akan dimuat di sini oleh JavaScript -->
             </div>
         </section>
     </div>
@@ -68,7 +62,7 @@
     <button class="button dark-mode-toggle" onclick="toggleDarkMode()">Mode Gelap</button>
 
     <div class="spotify-embed">
-        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1L0" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1 L0" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
     </div>
     <p>CopyRight; 2024 Petrels of Love. All rights reserved.</p>
 </body>
