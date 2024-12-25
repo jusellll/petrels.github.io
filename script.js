@@ -1,4 +1,4 @@
-// Konfigurasi Firebase
+/ Konfigurasi Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyC7IewP1noMdBdTMxjAKBdbLpRw0hJ0mKw",
     authDomain: "petrels-of-love-730c4.firebaseapp.com",
@@ -50,3 +50,8 @@ function loadMessages() {
 
 // Memuat pesan saat halaman dimuat
 window.onload = loadMessages;
+
+// Fungsi untuk mengaktifkan mode gelap
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+}
