@@ -1,14 +1,15 @@
 <?php
+// Konfigurasi database
 $servername = "localhost";
-$username = "root";
-$password = ""; // Sesuaikan dengan password MySQL Anda
-$dbname = "petrels_love";
+$username = "root"; // Ubah jika username database berbeda
+$password = ""; // Ubah jika ada password untuk MySQL
+$dbname = "love_petrels"; // Nama database Anda
 
-// Membuat koneksi
+// Buat koneksi ke database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Cek koneksi
+// Periksa koneksi
 if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
