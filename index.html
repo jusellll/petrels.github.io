@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petrels of Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function showHiddenMessage(message) {
+            alert(message);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Petrels of Love</h1>
+        <a href="#welcome-section" class="button">Mulai Petualangan</a>
+    </header>
+    
+    <div class="content" id="welcome-section">
+        <section class="welcome">
+            <h2>Selamat datang di dunia albatros mencintai petrels!</h2>
+            <p>Hai kamu, iya kamu yang lagi baca ini. Tahu nggak? Petrels itu kayak rasa cinta kita yang nggak ada habisnya, selalu terbang tinggi nyari yang terbaik. Jadi, siap buat seru-seruan bareng sambil ngerasain vibes cinta yang bikin senyum-senyum sendiri? Yuk, kita mulai petualangan ini, karena dunia lebih asyik kalau ada kamu.</p>
+        </section>
+
+        <section class="gallery">
+            <div class="image-container" onclick="showHiddenMessage('Pesan tersembunyi: Selalu terbang tinggi!')">
+                <img src="images/petrels.jpg" alt="Foto 1">
+                <div class="hidden-description">Selalu terbang tinggi!</div>
+            </div>
+            <div class="image-container" onclick="showHiddenMessage('Pesan tersembunyi: Cinta adalah perjalanan!')">
+                <img src="images/cinta.jpg" alt="Foto 2">
+                <div class="hidden-description">Cinta adalah perjalanan!</div>
+            </div>
+            <div class="image-container" onclick="showHiddenMessage('Pesan tersembunyi: Bersama menuju bintang!')">
+                <img src="images/sayang.jpg" alt="Foto 3">
+                <div class="hidden-description">Bersama menuju bintang!</div>
+            </div>
+            <div class="image-container" onclick="showHiddenMessage('Pesan tersembunyi: Kebahagiaan adalah cinta!')">
+                <img src="images/love.jpg" alt="Foto 4">
+                <div class="hidden-description">Kebahagiaan adalah cinta!</div>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <h3>Kirim Pesan Cinta</h3>
+            <form action="submit_message.php" method="POST">
+                <input type="text" name="name" placeholder="Nama Anda" required />
+                <textarea name="message" placeholder="Pesan Anda" required></textarea>
+                <button type="submit">Kirim</button>
+            </form>
+        </section>
+
+        <section id="messages">
+            <h3>Pesan Cinta Publik</h3>
+            <div id="messageContainer">
+                <!-- Memuat pesan cinta dari database -->
+                <?php include 'load_messages.php'; ?>
+            </div>
+        </section>
+    </div>
+
+    <button class="button dark-mode-toggle" onclick="toggleDarkMode()">Mode Gelap</button>
+
+    <div class="spotify-embed">
+        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1L0" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+</body>
+</html>
