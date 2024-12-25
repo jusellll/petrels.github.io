@@ -14,44 +14,51 @@ const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // Fungsi untuk mengirim pesan
-document.getElementById('messageForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Mencegah pengiriman formulir default
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('messageForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Mencegah pengiriman formulir default
 
-    const name = this.name.value;
-    const message = this.message.value;
+        const name = this.name.value;
+        const message = this.message.value;
 
-    // Menyimpan pesan ke Firestore
-    db.collection('messages').add({
-        name: name,
-        message: message,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
-        this.reset(); // Reset formulir setelah pengiriman
-        loadMessages(); // Memuat ulang pesan
-    }).catch(error => {
-        console.error("Error adding document: ", error);
-    });
-});
-
-// Fungsi untuk memuat pesan dari Firestore
-function loadMessages() {
-    const messageContainer = document.getElementById('messageContainer');
-    messageContainer.innerHTML = ''; // Kosongkan kontainer sebelum memuat ulang
-
-    db.collection('messages').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const messageElement = document.createElement('div');
-            messageElement.innerHTML = `<strong>${data.name}</strong>: ${data.message}`;
-            messageContainer.appendChild(messageElement);
+        // Menyimpan pesan ke Firestore
+        db.collection('messages').add({
+            name: name,
+            message: message,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            this.reset(); // Reset formulir setelah pengiriman
+            loadMessages(); // Memuat ulang pesan
+        }).catch(error => {
+            console.error("Error adding document: ", error);
         });
     });
-}
 
-// Memuat pesan saat halaman dimuat
-window.onload = loadMessages;
+    // Fungsi untuk memuat pesan dari Firestore
+    function loadMessages() {
+        const messageContainer = document.getElementById('messageContainer');
+        messageContainer.innerHTML = ''; // Kosongkan kontainer sebelum memuat ulang
+
+        db.collection('messages').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const messageElement = document.createElement('div');
+                messageElement.innerHTML = `<strong>${data.name}</strong>: ${data.message}`;
+                messageContainer.appendChild(messageElement);
+            });
+        });
+    }
+
+    // Memuat pesan saat halaman dimuat
+    loadMessages();
+});
 
 // Fungsi untuk mengaktifkan mode gelap
 function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+    document.body.classList.toggle("dark-mode");
+}
+
+// Fungsi untuk menampilkan pesan tersembunyi
+function showHiddenMessage(message) {
+    alert(message);
 }
