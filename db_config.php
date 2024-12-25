@@ -1,8 +1,8 @@
 <?php
 // Konfigurasi database
 $servername = "localhost";
-$username = "root"; // Ganti dengan username MySQL Anda
-$password = ""; // Ganti dengan password MySQL Anda
+$username = "root"; // Ubah jika username database berbeda
+$password = ""; // Ubah jika ada password untuk MySQL
 $dbname = "love_petrels"; // Nama database Anda
 
 // Buat koneksi ke database
