@@ -23,36 +23,34 @@ if (messageForm) {
                 },
                 body: new URLSearchParams({ name, message }),
             })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.text();
-                    } else {
-                        throw new Error('Gagal mengirim pesan ke server.');
-                    }
-                })
+                .then((response) => response.json()) // Ubah ke JSON
                 .then((data) => {
-                    // Perbarui kontainer pesan setelah berhasil
-                    const messageBox = document.createElement('div');
-                    messageBox.classList.add('message-box');
+                    if (data.status === 'success') {
+                        // Perbarui kontainer pesan setelah berhasil
+                        const messageBox = document.createElement('div');
+                        messageBox.classList.add('message-box');
 
-                    // Tambahkan nama pengirim
-                    const nameElement = document.createElement('div');
-                    nameElement.classList.add('name');
-                    nameElement.textContent = name;
-                    messageBox.appendChild(nameElement);
+                        // Tambahkan nama pengirim
+                        const nameElement = document.createElement('div');
+                        nameElement.classList.add('name');
+                        nameElement.textContent = name;
+                        messageBox.appendChild(nameElement);
 
-                    // Tambahkan pesan
-                    const messageElement = document.createElement('div');
-                    messageElement.classList.add('text');
-                    messageElement.textContent = message;
-                    messageBox.appendChild(messageElement);
+                        // Tambahkan pesan
+                        const messageElement = document.createElement('div');
+                        messageElement.classList.add('text');
+                        messageElement.textContent = message;
+                        messageBox.appendChild(messageElement);
 
-                    // Masukkan pesan ke dalam container
-                    messageContainer.appendChild(messageBox);
+                        // Masukkan pesan ke dalam container
+                        messageContainer.appendChild(messageBox);
 
-                    // Kosongkan form setelah pengiriman
-                    nameInput.value = '';
-                    messageInput.value = '';
+                        // Kosongkan form setelah pengiriman
+                        nameInput.value = '';
+                        messageInput.value = '';
+                    } else {
+                        alert('Gagal mengirim pesan: ' + data.message);
+                    }
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -68,7 +66,7 @@ if (darkModeToggle) {
         document.body.classList.toggle('dark-mode');
         // Simpan preferensi pengguna di localStorage
         const isDarkMode = document.body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDarkMode);
+        localStorage.setItem('darkMode ', isDarkMode);
     });
 
     // Muat preferensi pengguna dari localStorage
