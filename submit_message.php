@@ -1,21 +1,22 @@
 <?php
-// Sertakan file konfigurasi database
+// Sertakan konfigurasi database
 include 'db_config.php';
 
+// Periksa apakah data dikirim melalui metode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil data dari form dan sanitasi input untuk menghindari XSS
+    // Ambil data dari form dan sanitasi untuk keamanan
     $name = htmlspecialchars($_POST['name']);
     $message = htmlspecialchars($_POST['message']);
 
-    // Siapkan query SQL
+    // Query SQL untuk memasukkan data
     $sql = "INSERT INTO messages (name, message) VALUES (?, ?)";
 
-    // Gunakan prepared statement untuk menghindari SQL Injection
+    // Gunakan prepared statement untuk mencegah SQL Injection
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         $stmt->bind_param("ss", $name, $message); // Bind parameter
         if ($stmt->execute()) {
-            // Jika sukses, arahkan kembali ke halaman utama
+            // Jika berhasil, arahkan kembali ke halaman utama dengan pesan sukses
             header("Location: index.html?success=true");
             exit();
         } else {
