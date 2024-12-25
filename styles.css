@@ -24,7 +24,8 @@ header h1 {
     font-family: 'Pacifico', cursive;
     font-size: 4rem;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    animation: fadeIn 2s ease-in-out;
+    animation ```css
+: fadeIn 2s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -217,7 +218,7 @@ section {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
 
-    form input, form textarea {
+    form input , form textarea {
         width: 90%;
     }
 
