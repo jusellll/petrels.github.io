@@ -1,35 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("messageForm");
-    const messageContainer = document.getElementById("messageContainer");
+// Ambil elemen form dan messageContainer
+const messageForm = document.getElementById('messageForm');
+const nameInput = document.getElementById('name');
+const messageInput = document.getElementById('message');
+const messageContainer = document.getElementById('messageContainer');
 
-    // Muat pesan yang tersimpan
-    function loadMessages() {
-        const messages = JSON.parse(localStorage.getItem("messages")) || [];
-        messageContainer.innerHTML = "";
-        messages.forEach(({ name, text }) => {
-            const messageBox = document.createElement("div");
-            messageBox.className = "message-box";
-            messageBox.innerHTML = `
-                <div class="name">${name}</div>
-                <div class="text">${text}</div>
-            `;
-            messageContainer.appendChild(messageBox);
-        });
-    }
+// Menangani pengiriman pesan
+messageForm.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    // Simpan pesan baru
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const name = document.getElementById("name").value.trim();
-        const text = document.getElementById("message").value.trim();
-        if (name && text) {
-            const messages = JSON.parse(localStorage.getItem("messages")) || [];
-            messages.push({ name, text });
-            localStorage.setItem("messages", JSON.stringify(messages));
-            loadMessages();
-            form.reset();
-        }
-    });
+    const name = nameInput.value;
+    const message = messageInput.value;
 
-    loadMessages();
+    // Membuat elemen untuk pesan baru
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+    messageElement.innerHTML = `<strong>${name}</strong>: <p>${message}</p>`;
+
+    // Menambahkan pesan ke dalam container
+    messageContainer.appendChild(messageElement);
+
+    // Kosongkan form setelah pesan dikirim
+    nameInput.value = '';
+    messageInput.value = '';
 });
