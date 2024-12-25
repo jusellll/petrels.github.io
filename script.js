@@ -1,25 +1,25 @@
-// Ambil elemen form dan messageContainer
-const messageForm = document.getElementById('messageForm');
-const nameInput = document.getElementById('name');
-const messageInput = document.getElementById('message');
-const messageContainer = document.getElementById('messageContainer');
-
-// Menangani pengiriman pesan
-messageForm.addEventListener('submit', function(event) {
+document.getElementById('messageForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const name = nameInput.value;
-    const message = messageInput.value;
+    const name = document.getElementById('name').value;
+    const message = document.getElementById('message').value;
 
-    // Membuat elemen untuk pesan baru
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
-    messageElement.innerHTML = `<strong>${name}</strong>: <p>${message}</p>`;
+    const messageContainer = document.getElementById('messageContainer');
+    const messageBox = document.createElement('div');
+    messageBox.classList.add('message-box');
 
-    // Menambahkan pesan ke dalam container
-    messageContainer.appendChild(messageElement);
+    messageBox.innerHTML = `
+        <div class="name">${name}</div>
+        <div class="text">${message}</div>
+    `;
 
-    // Kosongkan form setelah pesan dikirim
-    nameInput.value = '';
-    messageInput.value = '';
+    messageContainer.appendChild(messageBox);
+
+    // Clear the form
+    document.getElementById('name').value = '';
+    document.getElementById('message').value = '';
 });
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+}
