@@ -1,59 +1,74 @@
-// Konfigurasi Firebase Anda
+// Inisialisasi Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyCfqwEUyqSrDIn4EdRmxS1RZtjH5OQ9RYE",
-  authDomain: "petrels-of-love.firebaseapp.com",
-  projectId: "petrels-of-love",
-  storageBucket: "petrels-of-love.firebasestorage.app",
-  messagingSenderId: "599592042717",
-  appId: "1:599592042717:web:1365cd940494e231d51b34",
-  measurementId: "G-6QHL2TBSY3"
+    apiKey: "AIzaSyCfqwEUyqSrDIn4EdRmxS1RZtjH5OQ9RYE",
+    authDomain: "petrels-of-love.firebaseapp.com",
+    databaseURL: "https://petrels-of-love.firebaseio.com",
+    projectId: "petrels-of-love",
+    storageBucket: "petrels-of-love.firebasestorage.app",
+    messagingSenderId: "599592042717",
+    appId: "1:599592042717:web:1365cd940494e231d51b34"
 };
 
-// Inisialisasi Firebase
+// Inisialisasi Firebase App
 const app = firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
+const database = firebase.database(app);
 
-// Ambil pesan dari database dan tampilkan
-function fetchMessages() {
-    const messageContainer = document.getElementById('messageContainer');
-    messageContainer.innerHTML = ''; // Kosongkan kontainer sebelum menambahkan pesan
+// Ambil elemen-elemen DOM
+const messageForm = document.getElementById('messageForm');
+const nameInput = document.getElementById('name');
+const messageInput = document.getElementById('message');
+const messageContainer = document.getElementById('messageContainer');
 
-    database.ref('messages/').once('value').then((snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-            const messageData = childSnapshot.val();
-            const messageBox = document.createElement('div');
-            messageBox.classList.add('message-box');
-            messageBox.innerHTML = `
-                <div class="name">${messageData.name}</div>
-                <div class="text">${messageData.message}</div>
-            `;
-            messageContainer.appendChild(messageBox);
-        });
+// Fungsi untuk memuat pesan dari Firebase
+function loadMessages() {
+    // Mendapatkan data pesan dari Firebase Realtime Database
+    const messagesRef = database.ref('messages');
+    messagesRef.on('value', (snapshot) => {
+        const messages = snapshot.val();
+        messageContainer.innerHTML = ''; // Kosongkan container sebelum memuat pesan
+
+        // Jika ada pesan
+        if (messages) {
+            Object.values(messages).forEach(msg => {
+                const messageBox = document.createElement('div');
+                messageBox.classList.add('message-box');
+
+                const nameElement = document.createElement('div');
+                nameElement.classList.add('name');
+                nameElement.textContent = msg.name;
+                messageBox.appendChild(nameElement);
+
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('text');
+                messageElement.textContent = msg.message;
+                messageBox.appendChild(messageElement);
+
+                messageContainer.appendChild(messageBox);
+            });
+        }
     });
 }
 
-// Kirim pesan ke database
-document.getElementById('messageForm').addEventListener('submit', function(event) {
+// Panggil fungsi untuk memuat pesan saat halaman dimuat
+loadMessages();
+
+// Event listener untuk form pengiriman pesan
+messageForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const message = document.getElementById('message').value;
+    const name = nameInput.value.trim();
+    const message = messageInput.value.trim();
 
-    // Simpan pesan ke database
-    database.ref('messages/').push({
-        name: name,
-        message: message
-    });
+    if (name && message) {
+        // Menyimpan pesan ke Firebase Realtime Database
+        const newMessageRef = database.ref('messages').push();
+        newMessageRef.set({
+            name: name,
+            message: message
+        });
 
-    // Clear the form
-    document.getElementById('name').value = '';
-    document.getElementById('message').value = '';
+        // Kosongkan form setelah pengiriman
+        nameInput.value = '';
+        messageInput.value = '';
+    }
 });
-
-// Panggil fungsi untuk mengambil pesan saat halaman dimuat
-fetchMessages();
-
-// Fungsi untuk toggle mode gelap
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-}
