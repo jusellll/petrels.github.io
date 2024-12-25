@@ -16,15 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt) {
         $stmt->bind_param("ss", $name, $message); // Bind parameter
         if ($stmt->execute()) {
-            // Jika berhasil, arahkan kembali ke halaman utama dengan pesan sukses
-            header("Location: index.html?success=true");
-            exit();
+            // Jika berhasil, kirim respons sukses
+            echo json_encode(['status' => 'success']);
         } else {
-            echo "Error: " . $stmt->error;
+            echo json_encode(['status' => 'error', 'message' => $stmt->error]);
         }
         $stmt->close(); // Tutup statement
     } else {
-        echo "Error: " . $conn->error;
+        echo json_encode(['status' => 'error', 'message' => $conn->error]);
     }
 
     $conn->close(); // Tutup koneksi
