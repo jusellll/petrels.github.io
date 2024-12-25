@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petrels of Love</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Petrels of Love</h1>
+        <a href="#welcome-section" class="button">Mulai Petualangan</a>
+    </header>
+    
+    <div class="content" id="welcome-section">
+        <section class="welcome">
+            <h2>Selamat datang di dunia albatros mencintai petrels!</h2>
+            <p>Hai kamu, iya kamu yang lagi baca ini. Tahu nggak? Petrels itu kayak rasa cinta kita yang nggak ada habisnya, selalu terbang tinggi nyari yang terbaik. Jadi, siap buat seru-seruan bareng sambil ngerasain vibes cinta yang bikin senyum-senyum sendiri? Yuk, kita mulai petualangan ini, karena dunia lebih asyik kalau ada kamu.</p>
+        </section>
+
+        <section class="gallery-section">
+            <h3>Galeri Kenangan</h3>
+            <div class="gallery">
+                <div class="image-container">
+                    <img src="images/petrels.jpg" alt="Petrels">
+                    <p class="hidden-description">Petrels: Melambangkan keabadian cinta.</p>
+                </div>
+                <div class="image-container">
+                    <img src="images/cinta.jpg" alt="Cinta">
+                    <p class="hidden-description">Cinta: Kekuatan terbesar di dunia.</p>
+                </div>
+                <div class="image-container">
+                    <img src="images/sayang.jpg" alt="Albatros">
+                    <p class="hidden-description">Albatros : Terbang melintasi samudra hati.</p>
+                </div>
+                <div class="image-container">
+                    <img src="images/love.jpg" alt="Love">
+                    <p class="hidden-description">Love: Menyatukan dua jiwa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <h3>Kirim Pesan Cinta</h3>
+            <form id="messageForm">
+                <input type="text" id="name" placeholder="Nama Anda" required />
+                <textarea id="message" placeholder="Pesan Anda" required></textarea>
+                <button type="submit">Kirim</button>
+            </form>
+        </section>
+
+        <section id="messages">
+            <h3>Pesan Cinta Publik</h3>
+            <div id="messageContainer"></div>
+        </section>
+    </div>
+
+    <button class="button dark-mode-toggle" onclick="toggleDarkMode()">Mode Gelap</button>
+    <div class="spotify-embed">
+        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX3rxVfibe1L0" width="300" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
