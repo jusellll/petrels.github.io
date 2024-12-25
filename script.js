@@ -13,7 +13,6 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-
 // Fungsi untuk mengirim pesan
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('messageForm').addEventListener('submit', function(event) {
@@ -22,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const name = this.name.value;
         const message = this.message.value;
 
-        console.log("Mengirim pesan:", name, message);
+        // Tambahkan console.log untuk debugging
+        console.log("Mengirim pesan:", name, message); // Menampilkan nama dan pesan di konsol
 
         // Menyimpan pesan ke Firestore
         db.collection('messages').add({
@@ -37,24 +37,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Fungsi untuk memuat pesan dari Firestore
-    function loadMessages() {
-        const messageContainer = document.getElementById('messageContainer');
-        messageContainer.innerHTML = ''; // Kosongkan kontainer sebelum memuat ulang
-
-        db.collection('messages').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const messageElement = document.createElement('div');
-                messageElement.innerHTML = `<strong>${data.name}</strong>: ${data.message}`;
-                messageContainer.appendChild(messageElement);
-            });
-        });
-    }
-
     // Memuat pesan saat halaman dimuat
-    loadMessages();
+    loadMessages(); // Panggil fungsi loadMessages saat halaman dimuat
 });
+
+// Fungsi untuk memuat pesan dari Firestore
+function loadMessages() {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.innerHTML = ''; // Kosongkan kontainer sebelum memuat ulang
+
+    db.collection('messages').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
+        console.log("Memuat pesan dari Firestore..."); // Log untuk debugging
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const messageElement = document.createElement('div');
+            messageElement.innerHTML = `<strong>${data.name}</strong>: ${data.message}`;
+            messageContainer.appendChild(messageElement);
+        });
+    }).catch(error => {
+        console.error("Error loading messages: ", error);
+    });
+}
 
 // Fungsi untuk mengaktifkan mode gelap
 function toggleDarkMode() {
