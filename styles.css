@@ -130,6 +130,24 @@ form button:hover {
     background-color: #ff1493;
 }
 
+/* Messages Section */
+#messages {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#messages ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#messages li {
+    background-color: #e9ecef;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 /* Styling untuk container pesan cinta */
 #messageContainer {
     display: flex;
