@@ -37,7 +37,7 @@ if (messageForm) {
                         messageBox.appendChild(nameElement);
 
                         // Tambahkan pesan
-                        const messageElement = document.createElement('div');
+                        const message Element = document.createElement('div');
                         messageElement.classList.add('text');
                         messageElement.textContent = message;
                         messageBox.appendChild(messageElement);
@@ -58,22 +58,6 @@ if (messageForm) {
                 });
         }
     });
-}
-
-// Event listener untuk tombol mode gelap
-if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', function () {
-        document.body.classList.toggle('dark-mode');
-        // Simpan preferensi pengguna di localStorage
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode ', isDarkMode);
-    });
-
-    // Muat preferensi pengguna dari localStorage
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'true') {
-        document.body.classList.add('dark-mode');
-    }
 }
 
 // Muat pesan saat halaman dimuat
